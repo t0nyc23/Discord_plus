@@ -5,7 +5,6 @@ from bs4 import BeautifulSoup
 import multiprocessing as mp
 import requests
 import tarfile
-import shutil
 import json
 import sys
 import os
