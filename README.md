@@ -6,7 +6,7 @@ Discord startup done foukin right
 ### discord_install.py
 - [ ] Install (python3) requirements
 - [ ] Checks if disc is installed
-- [ ]   - if hes - uninstall (auto/manually)
+- [ ]   - if yes - uninstall (auto/manually)
 - [ ] Create symlink to patch (root)
 - [ ] Create .desktop file (root)
 ### discord_patch.py
