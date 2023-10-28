@@ -11,4 +11,4 @@ Discord startup done foukin right
 - [ ] Create .desktop file (root)
 ### discord_patch.py
 - [x] Core functionality of the patch
-- [ ] Show dialog while checking/installing update
+- [x] Show dialog while checking/installing update
