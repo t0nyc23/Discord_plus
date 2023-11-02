@@ -1,6 +1,9 @@
 # Discord_plus
 Discord on linux does not update it's self.
 We do :)
+
+
+
 #Παράδειγμα
 Το Discord_plus είναι ένα Project που δίνει την δυνατότητα των αυτόματων Update της εφαρμογής Discord.
 Με άλλα λόγια παρατηρήσαμε πως όταν το Discord είναι εγκατεστημένο μέσω Snap, δημιουργούνται Bugs και δεν γίνεται σωστά η διαδικασία του Update.
