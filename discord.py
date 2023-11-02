@@ -65,11 +65,11 @@ def check_for_update(latest_version):
 			installed_version = json.load(build_info)['version']
 		if not(latest_version == installed_version):
 			return True
-		else:
-			return False
 	except FileNotFoundError:
 		print("Running for the first time...")
 		return True
+	
+	return False
 
 def update_discord(download_link, tar_file_name):
 	dialog = Dialog()
