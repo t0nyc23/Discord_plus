@@ -21,9 +21,3 @@ We do :)
 
 ## Installation
 ```git clone https://github.com/n0ns0n/Discord_plus $HOME/.local/share/Discord_plus && cd $HOME/.local/share/Discord_plus && bash install.sh```
-
-# TO DO
-### discord_install.py
-- [ ] Discord.png for .desktop file
-### discord_patch.py
-- [ ] Custom .ico for title bar (tkinter)

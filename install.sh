@@ -32,7 +32,7 @@ StartupWMClass=discord
 Comment=All-in-one voice and text chat for gamers that's free, secure, and works on both your desktop and phone.
 GenericName=Internet Messenger
 Exec=/usr/local/bin/discord
-Icon=$HOME/.local/share/Discord/discord.png
+Icon=$HOME/.local/share/Discord_plus/img/discord.png
 Type=Application
 Categories=Network;InstantMessaging;"
 echo "$desktop_file" | sudo tee /usr/share/applications/discord.desktop
