@@ -3,7 +3,7 @@ CRESET="\e[0m"
 RED="\e[1;31m"
 CYAN="\e[1;36m"
 echo -e "${CYAN}[+] Installing python3 requirements${CRESET}"
-sudo apt install python3-{requests,tk,bs4}
+sudo apt install python3-{requests,tk,bs4} -y
 Check_Discord () {
 	#Wanna do it yourself or we can do it for ya?
 	app_name="discord"

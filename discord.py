@@ -60,12 +60,16 @@ def install_discord_tar(download_link, tar_file_name):
 	os.system(f"rm {tar_file_name}")
 
 def check_for_update(latest_version):
-	with open(BUILD_INFO_PATH) as build_info:
-		installed_version = json.load(build_info)['version']
-	if not(latest_version == installed_version):
+	try:
+		with open(BUILD_INFO_PATH) as build_info:
+			installed_version = json.load(build_info)['version']
+		if not(latest_version == installed_version):
+			return True
+		else:
+			return False
+	except FileNotFoundError:
+		print("Running for the first time...")
 		return True
-	else:
-		return False
 
 def update_discord(download_link, tar_file_name):
 	dialog = Dialog()
