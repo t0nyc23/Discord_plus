@@ -24,11 +24,6 @@ We do :)
 
 # TO DO
 ### discord_install.py
-- [x] Install (python3) requirements
-- [x] Checks if disc is installed
-- [x]   - if yes - uninstall (auto/manually)
-- [x] Create symlink to patch (root)
-- [x] Create .desktop file (root)
+- [ ] Discord.png for .desktop file
 ### discord_patch.py
-- [x] Core functionality of the patch
-- [x] Show dialog while checking/installing update
+- [ ] Custom .ico for title bar (tkinter)
