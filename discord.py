@@ -1,26 +1,24 @@
 #!/usr/bin/env python3
-import tkinter as tk
-from tkinter import ttk, Tk
 from bs4 import BeautifulSoup
 import multiprocessing as mp
+from tkinter import ttk, Tk
+import tkinter as tk
 import requests
 import tarfile
 import json
-import sys
 import os
 
 API_URL         = "https://discord.com/api/download?platform=linux&format=tar.gz"
 DISCORD_PATH    = os.path.join(os.path.expanduser("~"), ".local/share/Discord")
 BUILD_INFO_PATH = DISCORD_PATH + "/resources/build_info.json"
 DISCORD_BINARY  = DISCORD_PATH + "/Discord"
-PATCH_SOURCE    = sys.argv[0]
 
 class Dialog:
 	def __init__(self):
 		self.root = Tk()
-		self.root.title("Updating")
+		self.root.title("Discord Plus - nonXrod")
 		self.root.resizable(False, False)
-		self.DX, self.DY = 400, 400
+		self.DX, self.DY = 350, 400
 		self.root.geometry(f"{self.DX}x{self.DY}")
 		self.dots_number = 0
 		self.canvas = tk.Canvas(self.root, width=self.DX, height=self.DY, bg='#10141C', highlightthickness=0)
@@ -35,13 +33,15 @@ class Dialog:
 		self.create_canvas()
 
 	def create_canvas(self):
-		max_len = 3
-		self.MESSAGE = f"Checking for updates{'.' * self.dots_number}{' ' * (max_len - self.dots_number)}"
+		text = "Updating discord"
+		max_len = len(text)
+		self.MESSAGE = f"{text}\n{'.' * self.dots_number}{' ' * (max_len - self.dots_number)}"
 		self.dots_number += 1
-		self.canvas.create_text((200, 200), text=self.MESSAGE, fill="orange", font='Arial 19')
+		self.canvas.create_text((175, 200), text=self.MESSAGE, fill="#E6E6E6", font='Monospace 15')
 		if self.dots_number > max_len:
 			self.dots_number = 0
-		self.root.after(500, self.refresh_canvas)
+		# Rrefresh canvas text after 200 mseconds
+		self.root.after(200, self.refresh_canvas)
 
 def get_download_info():
 	redirect_url    = requests.get(API_URL, allow_redirects=False).text
@@ -78,11 +78,10 @@ def update_discord(download_link, tar_file_name):
 			dialog_box.kill()
 			break
 
-download_link, tar_file_name, discord_version = get_download_info()
-has_update = check_for_update(discord_version)
-if has_update:	
-	update_discord(download_link, tar_file_name)
-cmd = f"{DISCORD_BINARY}&>/dev/null"
-os.system(cmd)
-#os.system(DISCORD_BINARY)
-sys.exit()
+if __name__ == "__main__":
+	download_link, tar_file_name, discord_version = get_download_info()
+	has_update = check_for_update(discord_version)
+	if has_update:	
+		update_discord(download_link, tar_file_name)
+	os.system(f"{DISCORD_BINARY}&>/dev/null")
+	quit()
