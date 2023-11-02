@@ -57,6 +57,7 @@ def install_discord_tar(download_link, tar_file_name):
 		archive.write(tar_file)
 	with tarfile.open(tar_file_name) as ex_archive:
 		ex_archive.extractall(DISCORD_PATH[:-7])
+	os.system(f"rm {tar_file_name}")
 
 def check_for_update(latest_version):
 	with open(BUILD_INFO_PATH) as build_info:
@@ -84,4 +85,4 @@ if __name__ == "__main__":
 	if has_update:	
 		update_discord(download_link, tar_file_name)
 	os.system(f"{DISCORD_BINARY}&>/dev/null")
-	quit()
+	#quit()
