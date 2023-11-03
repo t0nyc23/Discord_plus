@@ -48,16 +48,15 @@ discord_plus_fed () {
 	fi	
 }
 
+#DISTRO=`grep "^ID_LIKE=" /etc/os-release | awk 'BEGIN {FS="="} {print $2}'`
 echo -e "${CYAN}[+] Checking distro information${CRESET}"
-DISTRO=`grep "^ID=" /etc/os-release | awk 'BEGIN {FS="="} {print $2}'`
-if [[ "$DISTRO" == "debian" ]]; then
+which apt &> /dev/null
+if [ $? -eq 0 ]; then
 	echo -e "${CYAN}[+] Running debian based installation${CRESET}"
 	discord_plus_deb
-elif [[ "$DISTRO" == "fedora" ]]; then
+else
 	echo -e "${CYAN}[+] Running fedora based installation${CRESET}"
 	discord_plus_fed
-else
-	echo "Unknown Distro"
 fi
 
 echo -e "${CYAN}[+] Creating symlink to /usr/local/bin/discord${CRESET}"       
