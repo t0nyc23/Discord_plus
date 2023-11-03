@@ -89,4 +89,4 @@ if __name__ == "__main__":
 	if has_update:	
 		update_discord(download_link, tar_file_name)
 	os.system(f"{DISCORD_BINARY}&>/dev/null")
-	#quit()
+	quit()
