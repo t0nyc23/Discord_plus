@@ -2,3 +2,4 @@ __pycache__/
 discord-*.tar.gz
 test.py
 test.sh
+test.desktop

@@ -2,27 +2,64 @@
 CRESET="\e[0m"
 RED="\e[1;31m"
 CYAN="\e[1;36m"
-echo -e "${CYAN}[+] Installing python3 requirements${CRESET}"
-sudo apt install python3-{requests,tk,bs4} -y
-Check_Discord () {
-	#Wanna do it yourself or we can do it for ya?
-	app_name="discord"
-	dpkg -l | grep $app_name &>/dev/null
+APP="discord"
+
+snap_or_flat () {
+	snap list | grep $APP &> /dev/null
 	if [ $? -eq 0 ]; then
-        echo -e "\n\n${RED}[+] Discord is installed${CRESET}"
-        echo -e "${RED}[+] Trying to uninstall first${CRESET}\n\n"
-	    sudo apt-get remove $app_name
+		echo -e "\n\n${RED}[+] Discord is installed as a snap${CRESET}"
+		echo -e "${RED}[+] Trying to uninstall first${CRESET}\n\n"
+		sudo snap remove $APP
+	fi
+	flatpak list | grep $APP &> /dev/null
+	if [ $? -eq 0 ]; then
+		echo -e "\n\n${RED}[+] Discord is installed as a flatpak${CRESET}"
+		echo -e "${RED}[+] Trying to uninstall first${CRESET}\n\n"
+		flatpak uninstall -y discord
+	fi
+	echo -e "${CYAN}[+] Done${CRESET}\n\n"
+}
+
+discord_plus_deb () {
+	echo -e "${CYAN}[+] Installing python3 requirements${CRESET}"
+	sudo apt install python3-{requests,tk,bs4} -y
+	dpkg -l | grep $APP &> /dev/null
+	if [ $? -eq 0 ]; then
+		echo -e "\n\n${RED}[+] Discord is installed${CRESET}"
+		echo -e "${RED}[+] Trying to uninstall first${CRESET}\n\n"
+		sudo apt -y remove $APP
 	else
-	    snap list | grep $app_name &> /dev/null
-	    if [ $? -eq 0 ]; then
-	        echo -e "\n\n${RED}[+] Discord is installed as a snap${CRESET}"
-	        echo -e "${RED}[+] Trying to uninstall first${CRESET}\n\n"
-	        sudo snap remove $app_name
-	    fi
+		snap_or_flat
 	fi
 }
-echo -e "${CYAN}[+] Checking if Discord is installed${CRESET}"
-Check_Discord       
+
+discord_plus_fed () {
+	echo -e "${CYAN}[+] Installing python3 requirements${CRESET}"
+	sudo dnf install python3-{pip,requests,tkinter} -y
+	pip3 install bs4
+
+	dnf list | grep "^discord" &> /dev/null
+	if [ $? -eq 0 ]; then
+		echo -e "\n\n${RED}[+] Discord is installed${CRESET}"
+		echo -e "${RED}[+] Trying to uninstall first${CRESET}\n\n"
+		sudo dnf remove -y $APP
+	else
+		snap_or_flat
+	fi	
+}
+
+echo -e "${CYAN}[+] Checking distro information${CRESET}"
+DISTRO=`grep "^ID=" /etc/os-release | awk 'BEGIN {FS="="} {print $2}'`
+if [[ "$DISTRO" == "debian" ]]; then
+	echo -e "${CYAN}[+] Running debian based installation${CRESET}"
+	discord_plus_deb
+elif [[ "$DISTRO" == "fedora" ]]; then
+	echo -e "${CYAN}[+] Running fedora based installation${CRESET}"
+	discord_plus_fed
+else
+	echo "Unknown Distro"
+fi
+
 echo -e "${CYAN}[+] Creating symlink to /usr/local/bin/discord${CRESET}"       
 sudo ln -sf $(pwd)/discord.py /usr/local/bin/discord
 echo -e "${CYAN}[+] Creating .desktop file${CRESET}"
@@ -35,4 +72,4 @@ Exec=/usr/local/bin/discord
 Icon=$HOME/.local/share/Discord_plus/img/discord.png
 Type=Application
 Categories=Network;InstantMessaging;"
-echo "$desktop_file" | sudo tee /usr/share/applications/discord.desktop
+echo "$desktop_file" | sudo tee /usr/share/applications/discord.desktop > /dev/null
