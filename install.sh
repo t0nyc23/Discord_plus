@@ -60,7 +60,7 @@ else
 fi
 
 echo -e "${CYAN}[+] Creating symlink to /usr/local/bin/discord${CRESET}"       
-sudo ln -sf $(pwd)/discord.py /usr/local/bin/discord
+sudo ln -sf $(pwd)/discord_plus.py /usr/local/bin/discord
 echo -e "${CYAN}[+] Creating .desktop file${CRESET}"
 desktop_file="[Desktop Entry]
 Name=Discord
