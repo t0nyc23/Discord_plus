@@ -1,5 +1,5 @@
 # Discord plus
-
+Created with :black_heart: by [Rodkast](https://github.com/Rodkast) and me. :smiley:
 ## About the problem
 
 **Note:** We do not refer to the Snap or Flatpak versions of the app as they are not officially supported by Discord.
